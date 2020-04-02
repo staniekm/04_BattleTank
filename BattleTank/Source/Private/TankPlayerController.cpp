@@ -39,8 +39,8 @@ void ATankPlayerController::AimTowardCrosshair()
     FVector HitLocation; // out parameter
     if (GetSightRayHitLocation(HitLocation))
     {
-        //UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *HitLocation.ToString());
-        //tell controlled tank to aim at this point
+        UE_LOG(LogTemp, Warning, TEXT("Hit Location Direction: %s"), *HitLocation.ToString());
+        
     }
 }
 
@@ -57,22 +57,41 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
     FVector LookDirection;
     if (GetLookDirection(ScreenLocation, LookDirection))
     {
-        UE_LOG(LogTemp, Warning, TEXT("LookDirection location: %s"), *LookDirection.ToString());
+        //UE_LOG(LogTemp, Warning, TEXT("LookDirection location: %s"), *LookDirection.ToString());
+        // linetrace along that direction annd see what we hit (up to max range)
+        GetLookVectorHitLocation(LookDirection, HitLocation);
     }
-    
-    // linetrace along that direction annd see what we hit (up to max range)
 
     //HitLocation = FVector(1.0);
     return true;
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const
+{
+    FHitResult HitResult;
+    auto StartLocation = PlayerCameraManager->GetCameraLocation();
+    auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+
+    if (GetWorld()->LineTraceSingleByChannel(
+            HitResult,
+            StartLocation,
+            EndLocation,
+            ECollisionChannel::ECC_Visibility
+            ))
+    {
+        HitLocation = HitResult.Location;
+        return true;
+    }
+    HitLocation = FVector(0);
+    return false;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const
 {
     FVector CameraWorldLocation; // To be discarded
     return DeprojectScreenPositionToWorld(
-        ScreenLocation.X, 
-        ScreenLocation.Y, 
-        CameraWorldLocation, 
+        ScreenLocation.X,
+        ScreenLocation.Y,
+        CameraWorldLocation,
         LookDirection);
-    
 }
