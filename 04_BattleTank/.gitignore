@@ -1,9 +1,18 @@
+.vs
+/vs
+/.vs
+.vs/
+BattleTank/BattleTank.VC.VC.opendb
+BattleTank/.vs/
+.vs\
+
 *.VC.db
 BattleTank/BattleTank.VC.VC.opendb
 BattleTank/.vs/
 .vs/s
 
 *.vs
+*.vscode
 Content/StarterContent/*
 battletank_keybinding.png
 # Compiled Object files
@@ -67,3 +76,4 @@ DerivedDataCache/*
 
 # Starter Content
 Content/StarterContent
+
