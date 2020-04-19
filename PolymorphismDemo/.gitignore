@@ -6,12 +6,22 @@ BattleTank/BattleTank.VC.VC.opendb
 BattleTank/.vs/
 .vs\
 
+.vscode
+/vscode
+/.vscode
+.vscode/
+BattleTank/BattleTank.VC.VC.opendb
+BattleTank/.vscode/
+.vscode\
+
+
 *.VC.db
 BattleTank/BattleTank.VC.VC.opendb
 BattleTank/.vs/
 .vs/s
 
 *.vs
+*.vscode
 Content/StarterContent/*
 battletank_keybinding.png
 # Compiled Object files
