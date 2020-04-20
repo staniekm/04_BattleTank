@@ -3,27 +3,39 @@
 #include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankAIController.h"
+#include "Tank.h" // So we can impliment OnDeath
+
 // Depends on movement component via pathfinding syste
 
 void ATankAIController::BeginPlay()
 {
     Super::BeginPlay();
 
-    /* auto PlayerTank = GetPlayerTank();
-    if (!PlayerTank)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("AIController cant find player tank"));
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("AIController found player: %s"), *(PlayerTank->GetName()));
-    } */
 }
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		// Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossedTankDeath);
+	}
+}
+
+void ATankAIController::OnPossedTankDeath()
+{
+	if (!ensure(GetPawn())) { return; } // TODO remove if ok
+	GetPawn()->DetachFromControllerPendingDestroy();
+}
+
 
 void ATankAIController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
     auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
     auto ControlledTank = GetPawn();
 
