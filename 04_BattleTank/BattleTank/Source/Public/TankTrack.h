@@ -25,6 +25,14 @@ public:
 private:
 	UTankTrack();
 
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	TArray<class ASprungWheel*> GetWheels() const;
+
+	void DriveTrack(float CurrentThrottle);
 
 };
+
+//relative location for spawnpoint of sprungwheel but something FUCKED
+//front left 320 20
+//rear left -320 20
+//front right 320 -20 or -260
+//rear right -320 -20 or -260
