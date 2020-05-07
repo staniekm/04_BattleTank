@@ -19,7 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -27,11 +27,12 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+
 	bool FindTeleportDestination(FVector& OutLocation);
 	void UpdateDestinationMarker();
 
-	void MoveForward(float Throttle);
-	void MoveRight(float Throttle);
+	void MoveForward(float throttle);
+	void MoveRight(float throttle);
 
 	void BeginTeleport();
 	void FinishTeleport();
@@ -39,25 +40,28 @@ private:
 	void StartFade(float FromAlpha, float ToAlpha);
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* VRCamera;
+
+	UPROPERTY()
+		class UCameraComponent* Camera;
+	UPROPERTY()
+		class USceneComponent* VRRoot;
 
 	UPROPERTY(VisibleAnywhere)
-	class USceneComponent* VRRoot;
+		class UStaticMeshComponent* DestinationMarker;
 
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* DestinationMarker;
+	/*UPROPERTY()
+		class UNavigationSystemV1* navSystem;*/
 
 private:
 
 	UPROPERTY(EditAnywhere)
-	float MaxTeleportDistance = 1000;
+		float MaxTeleportDistance = 1000;
 
 	UPROPERTY(EditAnywhere)
-	float TeleportFadeTime = 0.5;
+		float TeleportFadeTime = 1;
 
 	UPROPERTY(EditAnywhere)
-	FVector TeleportProjectionExtent = FVector(500, 500, 500);
+		FVector TeleportProjectionExtent = FVector(100, 100, 100);
+
 
 };
-
