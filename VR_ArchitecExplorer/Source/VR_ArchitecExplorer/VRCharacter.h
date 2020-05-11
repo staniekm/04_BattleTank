@@ -58,7 +58,7 @@ private:
 		class USplineComponent* TeleportPath;
 
 	UPROPERTY()
-		TArray<class UStaticMeshComponent*> TeleportPathMeshPool;
+		TArray<class USplineMeshComponent*> TeleportPathMeshPool;
 
 	UPROPERTY(VisibleAnywhere)
 		class UStaticMeshComponent* DestinationMarker;
