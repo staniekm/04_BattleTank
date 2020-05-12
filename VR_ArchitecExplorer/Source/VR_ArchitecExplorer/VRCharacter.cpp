@@ -12,6 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/SplineComponent.h"
 #include "Components/SplineMeshComponent.h"
+#include "HandController.h"
 
 // Sets default values
 AVRCharacter::AVRCharacter()
@@ -31,18 +32,8 @@ AVRCharacter::AVRCharacter()
 	PostProcessComponent = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcessComponent"));
 	PostProcessComponent->SetupAttachment(GetRootComponent());
 
-	RightController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightController"));
-	RightController->SetupAttachment(VRRoot);
-	RightController->SetTrackingSource(EControllerHand::Right);
-	//RightController.bDisplayDeviceModel = true;
-
-	LeftController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftController"));
-	LeftController->SetupAttachment(VRRoot);
-	LeftController->SetTrackingSource(EControllerHand::Left);
-	//LeftController.bDisplayDeviceModel = true;
-
 	TeleportPath = CreateDefaultSubobject<USplineComponent>(TEXT("TeleportPath"));
-	TeleportPath->SetupAttachment(LeftController);
+	TeleportPath->SetupAttachment(VRRoot);
 }
 
 // Called when the game starts or when spawned
@@ -57,6 +48,23 @@ void AVRCharacter::BeginPlay()
 		BlinkerMaterialInstance = UMaterialInstanceDynamic::Create(BlinkerMaterialBase, this);
 		PostProcessComponent->AddOrUpdateBlendable(BlinkerMaterialInstance);
 	}
+
+	LeftController = GetWorld()->SpawnActor<AHandController>(HandControllerClass);
+	if (LeftController != nullptr)
+	{
+		LeftController->AttachToComponent(VRRoot, FAttachmentTransformRules::KeepRelativeTransform);
+		LeftController->SetHand(EControllerHand::Left);
+		LeftController->SetOwner(this);
+	}
+
+	RightController = GetWorld()->SpawnActor<AHandController>(HandControllerClass);
+	if (RightController != nullptr)
+	{
+		RightController->AttachToComponent(VRRoot, FAttachmentTransformRules::KeepRelativeTransform);
+		RightController->SetHand(EControllerHand::Right);
+		RightController->SetOwner(this);
+	}
+
 }
 
 // Called every frame
@@ -75,8 +83,8 @@ void AVRCharacter::Tick(float DeltaTime)
 
 bool AVRCharacter::FindTeleportDestination(TArray<FVector>& OutPath, FVector& OutLocation)
 {
-	FVector Start = LeftController->GetComponentLocation();
-	FVector Look = LeftController->GetForwardVector();
+	FVector Start = LeftController->GetActorLocation();
+	FVector Look = LeftController->GetActorForwardVector();
 	FPredictProjectilePathParams Params(
 		TeleportProjectileRadius,
 		Start,
