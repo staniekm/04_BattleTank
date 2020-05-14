@@ -13,5 +13,10 @@ UPainterSaveGame* UPainterSaveGame::Create()
 
 bool UPainterSaveGame::Save()
 {
-	return UGameplayStatics::SaveGameToSlot(this, TEXT("TEST Save"), 0);
+	return UGameplayStatics::SaveGameToSlot(this, TEXT("TEST"), 0);
+}
+
+UPainterSaveGame* UPainterSaveGame::Load()
+{
+	return Cast<UPainterSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("TEST"), 0));
 }

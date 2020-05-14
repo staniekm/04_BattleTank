@@ -28,6 +28,8 @@ private:
 	void RightTriggerPressed() { if (RightHandController) RightHandController->TriggerPressed(); }
 	void RightTriggerRealeased() { if (RightHandController) RightHandController->TriggerReleased(); }
 
+	void Save();
+	void Load();
 
 	// Config
 	UPROPERTY(EditDefaultsOnly)
