@@ -45,7 +45,8 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AVRPawn::Save()
 {
 	UPainterSaveGame* Painting = UPainterSaveGame::Create();
-	Painting->SetState("2");
+	Painting->SetState("Last State");
+	Painting->SerializeFromWorld(GetWorld());
 	Painting->Save();
 
 }
@@ -55,6 +56,7 @@ void AVRPawn::Load()
 	UPainterSaveGame* Painting = UPainterSaveGame::Load();
 	if (Painting)
 	{
+		Painting->DeserializeToWorld(GetWorld());
 		UE_LOG(LogTemp, Warning, TEXT("Paintint State %s:"), *Painting->GetState());
 	}
 	else
