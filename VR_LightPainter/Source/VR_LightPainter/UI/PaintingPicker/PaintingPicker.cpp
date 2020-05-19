@@ -57,9 +57,7 @@ void APaintingPicker::RefreshDots()
 	for (int32 i = 0; i <GetNumberOfPages(); ++i)
 	{
 		GetPaintingGrid()->AddPaginationDot(CurrentPage == i);
-
 	}
-
 }
 
 void APaintingPicker:: RefreshSlots()

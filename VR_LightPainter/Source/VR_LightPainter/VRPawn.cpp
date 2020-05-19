@@ -54,16 +54,18 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Pressed, this, &AVRPawn::RightTriggerPressed);
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Released, this, &AVRPawn::RightTriggerRealeased);
 
-	//PlayerInputComponent->BindAction(TEXT("PageRight"), EInputEvent::IE_Released, this, &AVRPawn::PaginateRightAxisInput);
+	PlayerInputComponent->BindAction(TEXT("PageRight"), EInputEvent::IE_Released, this, &AVRPawn::PaginateRightAxisInput);
+
+	PlayerInputComponent->BindAction(TEXT("PageLeft"), EInputEvent::IE_Released, this, &AVRPawn::PaginateLeftAxisInput);
 
 
-	PlayerInputComponent->BindAxis(TEXT("PaginateRight"), this, &AVRPawn::PaginateRightAxisInput);
+	//PlayerInputComponent->BindAxis(TEXT("PaginateRight"), this, &AVRPawn::PaginateRightAxisInput);
 
 }
 
-void  AVRPawn::PaginateRightAxisInput(float AxisValue)
+void AVRPawn::PaginateRightAxisInput()
 {
-	int32 PaginationOffset = 0;
+	/*int32 PaginationOffset = 0;
 	PaginationOffset += AxisValue > PaginationThumbstickThreshold ? 1 : 0;
 	PaginationOffset += AxisValue < -PaginationThumbstickThreshold ? -1 : 0;
 
@@ -72,7 +74,38 @@ void  AVRPawn::PaginateRightAxisInput(float AxisValue)
 		UpdateCurrentPage(PaginationOffset);
 	}
 
+	LastPaginationOffset = PaginationOffset;*/
+	
+
+	/*PaginationOffset = PaginationOffset + 1;
+
+	if (PaginationOffset != LastPaginationOffset && PaginationOffset != 0)
+	{
+		UpdateCurrentPage(PaginationOffset);
+	}
+
+	LastPaginationOffset = PaginationOffset;*/
+	PaginationOffset = 0;
+	PaginationOffset += 1;
+	
+	UpdateCurrentPage(PaginationOffset);
 	LastPaginationOffset = PaginationOffset;
+	PaginationOffset = 0;
+}
+
+void AVRPawn::PaginateLeftAxisInput()
+{
+	PaginationOffset = 0;
+
+	PaginationOffset = PaginationOffset - 1;
+
+	if (PaginationOffset != LastPaginationOffset && PaginationOffset != 0)
+	{
+		UpdateCurrentPage(PaginationOffset);
+	}
+
+	LastPaginationOffset = PaginationOffset;
+	PaginationOffset = 0;
 }
 
 void AVRPawn::UpdateCurrentPage(int32 Offset)
