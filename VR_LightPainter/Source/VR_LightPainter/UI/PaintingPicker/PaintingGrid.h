@@ -27,6 +27,7 @@ public:
 	void AddPaginationDot(bool bActive);
 
 	void ClearPaintings();
+	void ClearPaginationDots();
 
 	int32 GetNumberOfSlots() const;
 protected:

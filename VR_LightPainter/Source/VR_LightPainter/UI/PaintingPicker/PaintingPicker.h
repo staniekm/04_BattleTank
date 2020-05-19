@@ -26,6 +26,15 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPaintingGrid* GetPaintingGrid() const { return Cast<UPaintingGrid>(PaintingGrid->GetUserWidgetObject()); }
+
+	void Refresh() { RefreshSlots(); RefreshDots(); }
+	void RefreshSlots();
+	int32 GetNumberOfPages() const;
+	void RefreshDots();
+
+
+	// References
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
 
@@ -35,8 +44,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UWidgetComponent* ActionBar;
 
-	UPaintingGrid* GetPaintingGrid() const { return Cast<UPaintingGrid>(PaintingGrid->GetUserWidgetObject()); }
-
-	void RefreshSlots();
-	int32 GetNumberOfPages() const;
+	// State
+	UPROPERTY(EditAnywhere)
+	int32 CurrentPage = 0;
 };
