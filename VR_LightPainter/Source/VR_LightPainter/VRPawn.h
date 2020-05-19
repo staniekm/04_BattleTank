@@ -29,6 +29,7 @@ private:
 
 	void PaginateRightAxisInput(float AxisValue);
 
+	void UpdateCurrentPage(int32 Offset);
 	// Config
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AHandControllerBase> RightHandControllerClass;

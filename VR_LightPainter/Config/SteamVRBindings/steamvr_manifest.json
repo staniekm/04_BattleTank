@@ -82,6 +82,10 @@
 			"type": "boolean"
 		},
 		{
+			"name": "/actions/main/in/PageRight",
+			"type": "boolean"
+		},
+		{
 			"name": "/actions/main/in/PaginateRight axis",
 			"type": "vector1"
 		}
@@ -201,6 +205,7 @@
 			"/actions/main/out/vibrateright": "Haptic (Right)",
 			"/actions/main/in/open_console": "Open Console",
 			"/actions/main/in/RightTrigger": "RightTrigger",
+			"/actions/main/in/PageRight": "PageRight",
 			"/actions/main/in/PaginateRight axis": "PaginateRight",
 			"/actions/main": "Main Game Actions"
 		}

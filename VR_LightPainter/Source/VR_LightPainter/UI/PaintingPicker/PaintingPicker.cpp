@@ -90,3 +90,10 @@ void APaintingPicker::ToggleDeleteMode()
 	GetPaintingGrid()->ClearPaintings();
 }
 
+void APaintingPicker::UpdateCurrentPage(int32 Offset)
+{
+	CurrentPage += FMath::Clamp(CurrentPage + Offset, 0, GetNumberOfPages()-1);
+
+	Refresh();
+}
+

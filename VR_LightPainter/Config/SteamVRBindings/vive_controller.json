@@ -17,6 +17,21 @@
 							"output": "/actions/main/in/RightTrigger"
 						}
 					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/trackpad",
+					"parameters":
+					{
+						"sub_mode": "click"
+					},
+					"inputs":
+					{
+						"east":
+						{
+							"output": "/actions/main/in/PageRight"
+						}
+					}
 				}
 			],
 			"poses": [
