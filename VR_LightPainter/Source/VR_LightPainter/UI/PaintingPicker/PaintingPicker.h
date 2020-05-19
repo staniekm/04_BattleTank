@@ -19,11 +19,7 @@ public:
 
 	void AddPainting();
 
-	void ToggleDeleteMode() 
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Toggle delete mode."));
-	}
-
+	void ToggleDeleteMode();
 
 protected:
 	virtual void BeginPlay() override;
