@@ -1,6 +1,8 @@
 # game-dev
 part of game development course in UE4.
 
+### 05_SimpleShooter
+third-person shooter (without AssetPacks) <sub><sup>UE 4.25</sup></sub>
 ### VR_LightPainter
 3D painting interface <sub><sup>UE 4.24.3</sup></sub>
 ### VR_ArchitecExplorer
