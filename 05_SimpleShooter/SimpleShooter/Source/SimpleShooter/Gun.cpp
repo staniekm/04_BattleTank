@@ -15,6 +15,11 @@ AGun::AGun()
 	Mesh->SetupAttachment(Root);
 }
 
+void AGun::PullTrigger()
+{
+	UE_LOG(LogTemp,Warning,TEXT("SHOT"));
+}
+
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();

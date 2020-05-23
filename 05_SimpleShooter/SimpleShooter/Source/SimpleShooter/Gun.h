@@ -14,6 +14,9 @@ class SIMPLESHOOTER_API AGun : public AActor
 public:	
 	AGun();
 
+	UFUNCTION()
+	void PullTrigger();
+	
 protected:
 	virtual void BeginPlay() override;
 
