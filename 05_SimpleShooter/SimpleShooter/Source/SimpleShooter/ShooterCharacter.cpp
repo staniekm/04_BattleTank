@@ -22,6 +22,11 @@ void AShooterCharacter::BeginPlay()
 	Gun->SetOwner(this);
 }
 
+bool AShooterCharacter::IsDead() const
+{
+	return Health <= 0;
+}
+
 void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
