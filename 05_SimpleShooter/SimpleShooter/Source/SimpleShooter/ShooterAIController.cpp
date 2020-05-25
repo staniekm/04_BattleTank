@@ -11,17 +11,22 @@ void AShooterAIController::Tick(float DeltaSeconds)
     APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     if (PlayerPawn == nullptr) return;
     
-    MoveToActor(PlayerPawn, 200);
+    if (LineOfSightTo(PlayerPawn))
+    {
+        SetFocus(PlayerPawn);
+        MoveToActor(PlayerPawn, AcceptanceRadius);
+    }
+    else
+    {
+        ClearFocus(EAIFocusPriority::Gameplay);
+        StopMovement();
+    }
+
+    // TODO turn off focus when AI is dead
 }
 
 void AShooterAIController::BeginPlay()
 {
     Super::BeginPlay();
 
-    APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    if (PlayerPawn == nullptr) return;
-
-    SetFocus(PlayerPawn);
-
-    // TODO turn off focus when AI is dead
-   }
+}
