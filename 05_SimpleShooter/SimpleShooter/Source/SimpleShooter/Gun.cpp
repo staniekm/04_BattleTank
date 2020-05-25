@@ -21,7 +21,8 @@ AGun::AGun()
 
 void AGun::PullTrigger()
 {
-	//UE_LOG(LogTemp,Warning,TEXT("SHOT"));
+	//
+
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
