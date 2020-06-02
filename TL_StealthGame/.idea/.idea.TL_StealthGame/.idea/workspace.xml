@@ -20,14 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c82fc845-1b49-41a1-afe5-dfa7486ef212" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP_ObjectiveActor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP_ObjectiveActor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/FirstPersonCPP/Blueprints/FirstPersonProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FirstPersonCPP/Blueprints/FirstPersonProjectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/FirstPersonCPP/Maps/FirstPersonExampleMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FirstPersonCPP/Maps/FirstPersonExampleMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/P_fire.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +40,7 @@
     <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameHUD.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Engine/Classes/Components/SphereComponent.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -55,6 +51,7 @@
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameProjectile.h" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.cpp" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" />
+        <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" />
       </list>
     </option>
@@ -190,7 +187,7 @@
       <option name="presentableId" value="Default" />
       <updated>1591091368833</updated>
       <workItem from="1591091411033" duration="4155000" />
-      <workItem from="1591097434294" duration="2164000" />
+      <workItem from="1591097434294" duration="3181000" />
     </task>
     <servers />
   </component>
