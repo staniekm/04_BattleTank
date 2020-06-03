@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c82fc845-1b49-41a1-afe5-dfa7486ef212" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TL_StealthGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/FirstPersonExampleMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FirstPersonExampleMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/FirstPersonProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FirstPersonProjectile.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,8 @@
     <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameHUD.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_4.25/Engine/Source/Runtime/Engine/Classes/Components/SphereComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/BlackHole.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TL_StealthGame/BlackHole.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -50,9 +54,11 @@
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameProjectile.cpp" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameProjectile.h" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.cpp" />
-        <option value="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/TL_StealthGameCharacter.h" />
         <option value="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.cpp" />
+        <option value="$PROJECT_DIR$/Source/TL_StealthGame/ObjectiveActor.h" />
+        <option value="$PROJECT_DIR$/Source/TL_StealthGame/BlackHole.h" />
+        <option value="$PROJECT_DIR$/Source/TL_StealthGame/BlackHole.cpp" />
       </list>
     </option>
   </component>
@@ -187,7 +193,7 @@
       <option name="presentableId" value="Default" />
       <updated>1591091368833</updated>
       <workItem from="1591091411033" duration="4155000" />
-      <workItem from="1591097434294" duration="3181000" />
+      <workItem from="1591097434294" duration="6889000" />
     </task>
     <servers />
   </component>
