@@ -10,7 +10,10 @@ UCLASS(minimalapi)
 class ATL_StealthGameGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+protected:
 
+	UPROPERTY(EditDefaultsOnly, Category="Spectating")
+	TSubclassOf<AActor> SpectatingViewpointClass;
 public:
 	ATL_StealthGameGameMode();
 
