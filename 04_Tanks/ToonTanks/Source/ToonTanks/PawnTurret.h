@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "PawnBase.h"
+#include "PawnTank.h"
+
 #include "PawnTurret.generated.h"
 
 /**
@@ -27,11 +29,16 @@ private:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement", meta = (AllowPrivateAccess = "true"))
 	float FireRate = 2.0f;
-	
-	void CheckFireCondition();
-	FTimerHandle FireRateTimerHandle;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Movement", meta = (AllowPrivateAccess = "true"))
+	float FireRange = 500.0f;
 	
+	FTimerHandle FireRateTimerHandle;
+	APawnTank* PlayerPawn;
+
+	void CheckFireCondition();
+
+	float ReturnDistanceToPlayer();
 protected:
 	
 	
