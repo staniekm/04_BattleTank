@@ -3,28 +3,66 @@
 
 #include "TankGameModeBase.h"
 
+
+#include "Kismet/GameplayStatics.h"
+#include "ToonTanks/PawnTurret.h"
+
 void ATankGameModeBase::BeginPlay()
 {
     // Get references and game win/lose conditions.
 
     // Call HandleGameStart to initialise the start countdown, turret activation, pawn check etc.
-} 
+
+    TargetTurrets = GetTargetTurrets();
+
+    PlayerTank = Cast<APawnTank>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+    HandleGameStart();
+    
+    Super::BeginPlay();
+}
+
+int32 ATankGameModeBase::GetTargetTurrets()
+{
+    TSubclassOf<APawnTurret> ClassToFind;
+    ClassToFind = APawnTurret::StaticClass();
+    TArray<AActor*> TurretActors;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ClassToFind, TurretActors);
+
+    return TurretActors.Num();
+}
 
 void ATankGameModeBase::ActorDied(AActor *DeadActor)
 {
-	UE_LOG(LogTemp, Warning, TEXT("An Actor died"));
-} 
+	// UE_LOG(LogTemp, Warning, TEXT("An Actor died"));
+
+    if (DeadActor == PlayerTank)
+    {
+        PlayerTank->PawnDestroyed();
+        HandleGameOver(false);
+    }
+    else if (APawnTurret* DestroyedTurret = Cast<APawnTurret>(DeadActor))
+    {
+        DestroyedTurret->PawnDestroyed();
+
+        TargetTurrets--;
+
+        if (TargetTurrets == 0)
+        {
+            HandleGameOver(true);
+        }
+    }
+}
+
+
 
 void ATankGameModeBase::HandleGameStart()
 {
-    // Initialise the start countdown, turret activation, pawn check etc.
-    // Call Blueprint version GameStart();
+   GameStart();
 } 
 
 void ATankGameModeBase::HandleGameOver(bool PlayerWon)
 {
-    // See if the player has destroyed all the turrets, show win result.
-    // else if turret destroyed player, show lose result. 
-    // Call blueprint version GameOver();
+    GameOver(PlayerWon);
 }
 
