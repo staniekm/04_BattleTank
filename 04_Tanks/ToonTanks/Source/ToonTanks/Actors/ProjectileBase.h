@@ -24,6 +24,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* ProjectileMesh;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
+	UParticleSystemComponent* ParticleTrail;
+	
 	UPROPERTY(EditDefaultsOnly, Category="Damage", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UDamageType> DamageType;
 
