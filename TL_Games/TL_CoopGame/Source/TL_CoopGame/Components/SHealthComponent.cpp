@@ -17,7 +17,7 @@ void USHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	AActor* MyOwner = GetOwner();
-	if (MyOwner && MyOwner->HasAuthority())
+	if (MyOwner && MyOwner->GetLocalRole() == ROLE_Authority)
 	{
 		MyOwner->OnTakeAnyDamage.AddDynamic(this, &USHealthComponent::HandleTakeAnyDamage);
 	}

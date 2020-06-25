@@ -39,6 +39,8 @@ ASTrackerBot::ASTrackerBot()
 
 	ExplosionDamage = 40;
 	ExplosionRadius = 200;
+
+	SelfDamageInterval = 0.25f;
 }
 
 void ASTrackerBot::BeginPlay()
@@ -46,7 +48,11 @@ void ASTrackerBot::BeginPlay()
 	Super::BeginPlay();
 
 	// Find Initial Move To
-	NexTPathPoint = GetNextPathPoint();
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		NexTPathPoint = GetNextPathPoint();
+		
+	}
 
 	
 }
@@ -98,30 +104,42 @@ void ASTrackerBot::SelfDestruct()
 	
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
 
-	TArray<AActor*> IgnoredActors;
-	IgnoredActors.Add(this);
-	
-	UGameplayStatics::ApplyRadialDamage(this,
-		ExplosionDamage,
-		GetActorLocation(),
-		ExplosionRadius,
-		nullptr,
-		IgnoredActors,
-		this,
-		GetInstigatorController(),
-		true);
+	UGameplayStatics::PlaySoundAtLocation(this, ExplodeSound, GetActorLocation());
 
-	DrawDebugSphere(GetWorld(),
-		GetActorLocation(),
-		ExplosionRadius,
-		12,
-		FColor::Red,
-		false,
-		2.0f,
-		0,
-		1.0f);
+	MeshComp->SetVisibility(false, true);
+	MeshComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 	
-	Destroy();
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		TArray<AActor*> IgnoredActors;
+		IgnoredActors.Add(this);
+	
+		UGameplayStatics::ApplyRadialDamage(this,
+            ExplosionDamage,
+            GetActorLocation(),
+            ExplosionRadius,
+            nullptr,
+            IgnoredActors,
+            this,
+            GetInstigatorController(),
+            true);
+
+		DrawDebugSphere(GetWorld(),
+            GetActorLocation(),
+            ExplosionRadius,
+            12,
+            FColor::Red,
+            false,
+            2.0f,
+            0,
+            1.0f);
+
+		//Destroy();
+
+		SetLifeSpan(2.0f);
+	}
+	
 }
 
 void ASTrackerBot::DamageSelf()
@@ -133,41 +151,53 @@ void ASTrackerBot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float DistanceToTarget = (GetActorLocation() - NexTPathPoint).Size(); 
-	if (DistanceToTarget <= RequiredDistanceToTarget)
+	if (GetLocalRole() == ROLE_Authority && !bExploded)
 	{
-		NexTPathPoint = GetNextPathPoint();
+		float DistanceToTarget = (GetActorLocation() - NexTPathPoint).Size(); 
+		if (DistanceToTarget <= RequiredDistanceToTarget)
+		{
+			NexTPathPoint = GetNextPathPoint();
 
-		//DrawDebugString(GetWorld(), GetActorLocation(), "Target Reached");
+			//DrawDebugString(GetWorld(), GetActorLocation(), "Target Reached");
 
-	}
-	else
-	{
-		// keep moving towards next target
-		FVector ForceDirection = NexTPathPoint - GetActorLocation();
-		ForceDirection.Normalize();
+		}
+		else
+		{
+			// keep moving towards next target
+			FVector ForceDirection = NexTPathPoint - GetActorLocation();
+			ForceDirection.Normalize();
 
-		ForceDirection *= MovementForce;
+			ForceDirection *= MovementForce;
 		
-		MeshComp->AddForce(ForceDirection, NAME_None, bUseVelocityChange);
+			MeshComp->AddForce(ForceDirection, NAME_None, bUseVelocityChange);
 
-		DrawDebugDirectionalArrow(GetWorld(), GetActorLocation(), GetActorLocation() + ForceDirection, 32, FColor::Yellow, false, 0.0f, 1.0f);
+			DrawDebugDirectionalArrow(GetWorld(), GetActorLocation(), GetActorLocation() + ForceDirection, 32, FColor::Yellow, false, 0.0f, 1.0f);
+		}
+
+		DrawDebugSphere(GetWorld(), NexTPathPoint, 20, 12, FColor::Yellow, false, 0.0f, 1.0f);
+
 	}
+	
 
-	DrawDebugSphere(GetWorld(), NexTPathPoint, 20, 12, FColor::Yellow, false, 0.0f, 1.0f);
 }
 
 void ASTrackerBot::NotifyActorBeginOverlap(AActor* OtherActor)
 {
-	if (!bStartedSelfDestruction)
+	if (!bStartedSelfDestruction && !bExploded)
 	{
 		ASCharacter* PlayerPawn = Cast<ASCharacter>(OtherActor);
 		if (PlayerPawn)
 		{
 			// Start self destruction sequence
-			GetWorldTimerManager().SetTimer(TimerHandle_SelfDamage, this, &ASTrackerBot::DamageSelf, 0.5f, true, 0.0f);
+
+			if (GetLocalRole() == ROLE_Authority)
+			{
+				GetWorldTimerManager().SetTimer(TimerHandle_SelfDamage, this, &ASTrackerBot::DamageSelf, SelfDamageInterval, true, 0.0f);
+			}
 
 			bStartedSelfDestruction = true;
+
+			UGameplayStatics::SpawnSoundAttached(SelfDestructSound, RootComponent);
 		}
 	}
 

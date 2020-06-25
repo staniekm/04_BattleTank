@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Pawn.h"
+#include "Sound/SoundCue.h"
 #include "TL_CoopGame/Components/SHealthComponent.h"
 
 #include "STrackerBot.generated.h"
@@ -62,9 +63,20 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="TracketBot")
 	float ExplosionDamage;
 
+	UPROPERTY(EditDefaultsOnly, Category="TracketBot")
+	float SelfDamageInterval;
+	
 	FTimerHandle TimerHandle_SelfDamage;
 
 	void DamageSelf();
+
+	UPROPERTY(EditDefaultsOnly, Category="TracketBot")
+	USoundCue* SelfDestructSound;
+
+	UPROPERTY(EditDefaultsOnly, Category="TracketBot")
+    USoundCue* ExplodeSound;
+
+	
 	
 public:	
 	virtual void Tick(float DeltaTime) override;
